@@ -34,7 +34,6 @@ const MockInterview = () => {
     error,
     startListening,
     stopListening,
-    resetTranscript,
     speakingAnalysis,
     liveConfidenceScore
   } = useSpeechRecognition(isQuestionSpeaking);

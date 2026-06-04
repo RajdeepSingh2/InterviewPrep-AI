@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaMicrophone, FaMicrophoneSlash, FaPlay } from 'react-icons/fa';
 
 const VoiceRecorder = ({ 

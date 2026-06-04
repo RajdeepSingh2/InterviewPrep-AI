@@ -24,19 +24,19 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Resources</h4>
           <ul>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">Privacy</a></li>
+            <li><button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', textDecoration: 'underline'}}>Blog</button></li>
+            <li><button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', textDecoration: 'underline'}}>Documentation</button></li>
+            <li><button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', textDecoration: 'underline'}}>Support</button></li>
+            <li><button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', textDecoration: 'underline'}}>Privacy</button></li>
           </ul>
         </div>
         
         <div className="footer-section">
           <h4>Follow Us</h4>
           <div className="social-links">
-            <a href="#" title="GitHub"><FaGithub size={20} /></a>
-            <a href="#" title="LinkedIn"><FaLinkedin size={20} /></a>
-            <a href="#" title="Twitter"><FaTwitter size={20} /></a>
+            <button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer'}} title="GitHub"><FaGithub size={20} /></button>
+            <button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer'}} title="LinkedIn"><FaLinkedin size={20} /></button>
+            <button style={{background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer'}} title="Twitter"><FaTwitter size={20} /></button>
           </div>
         </div>
       </div>

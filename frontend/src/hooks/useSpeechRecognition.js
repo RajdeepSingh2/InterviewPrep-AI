@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 
-const FILLER_WORDS = ['um', 'uh', 'like', 'basically', 'you know', 'actually', 'kind of', 'sort of'];
 const FILLER_PATTERNS = /\b(um|uh|like|basically|you know|actually|kind of|sort of)\b/gi;
 
 const useSpeechRecognition = (isQuestionSpeaking = false) => {
@@ -14,6 +13,7 @@ const useSpeechRecognition = (isQuestionSpeaking = false) => {
   const accumulatedTranscriptRef = useRef('');
   const shouldBeListeningRef = useRef(false);
   const interimTranscriptRef = useRef('');
+  const isQuestionSpeakingRef = useRef(isQuestionSpeaking);
   
   // Speaking analysis refs
   const startTimeRef = useRef(null);
@@ -21,6 +21,10 @@ const useSpeechRecognition = (isQuestionSpeaking = false) => {
   const fillerWordsRef = useRef([]);
   const pausesRef = useRef([]);
   const wordsTimingRef = useRef([]);
+
+  useEffect(() => {
+    isQuestionSpeakingRef.current = isQuestionSpeaking;
+  }, [isQuestionSpeaking]);
 
   useEffect(() => {
     // Check if browser supports speech recognition
@@ -47,8 +51,8 @@ const useSpeechRecognition = (isQuestionSpeaking = false) => {
 
     recognition.onresult = (event) => {
       // Ignore speech recognition results while AI is speaking the question
-      console.log('🎤 Speech recognition result - isQuestionSpeaking:', isQuestionSpeaking, 'transcript length:', event.results[0][0].transcript.length);
-      if (isQuestionSpeaking) {
+      console.log('🎤 Speech recognition result - isQuestionSpeaking:', isQuestionSpeakingRef.current, 'transcript length:', event.results[0][0].transcript.length);
+      if (isQuestionSpeakingRef.current) {
         console.log('🔇 Ignoring speech recognition - AI is speaking');
         return;
       }
@@ -177,8 +181,8 @@ const useSpeechRecognition = (isQuestionSpeaking = false) => {
 
   const startListening = () => {
     // Prevent starting microphone while AI is speaking the question
-    console.log('🎤 Attempting to start listening - isQuestionSpeaking:', isQuestionSpeaking);
-    if (isQuestionSpeaking) {
+    console.log('🎤 Attempting to start listening - isQuestionSpeaking:', isQuestionSpeakingRef.current);
+    if (isQuestionSpeakingRef.current) {
       console.log('❌ Cannot start listening - AI is still speaking');
       setError('Please wait for the question to finish speaking before starting to record.');
       return;

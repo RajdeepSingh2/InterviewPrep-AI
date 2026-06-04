@@ -15,7 +15,6 @@ function App() {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : true;
   });
-  const [activeLink, setActiveLink] = useState('/');
 
   useEffect(() => {
     // Update document theme
@@ -32,7 +31,6 @@ function App() {
         <Header 
           isDarkMode={isDarkMode} 
           setIsDarkMode={setIsDarkMode}
-          activeLink={activeLink}
         />
         
         <main className="main-content">

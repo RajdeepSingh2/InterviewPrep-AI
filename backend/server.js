@@ -12,7 +12,29 @@ const analyticsRoutes = require('./routes/analytics');
 const app = express();
 
 // Middleware
-app.use(cors());
+// CORS configuration for production
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5000',
+  'https://interview-prep-dv8uxuj7o-rajdeepsinghlmb-7779s-projects.vercel.app',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200,
+  preflightContinue: false
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 

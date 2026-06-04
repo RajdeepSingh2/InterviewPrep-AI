@@ -33,6 +33,6 @@ export const analyticsAPI = {
 };
 
 // Health check
-export const healthCheck = () => apiClient.get('https://localhost:5000/api/health');
+export const healthCheck = () => apiClient.get('/health');
 
 export default apiClient;

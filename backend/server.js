@@ -41,6 +41,21 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // Database connection
 connectDB();
 
+// Handle preflight requests
+app.options('*', cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200
+}));
+
 // Routes
 app.use('/api/interviews', interviewRoutes);
 app.use('/api/sessions', sessionRoutes);
